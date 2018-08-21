@@ -25,7 +25,8 @@ var isChrome = !!window.chrome && !!window.chrome.webstore;
 // Blink engine detection
 var isBlink = (isChrome || isOpera) && !!window.CSS;
 
-
+// resize and determine whether to center vertical (absolute) 
+// or stick to top (relative)
 function resize(selector) {
   var div = $(selector).height();
   var win = $(window).height();
@@ -38,6 +39,30 @@ function resize(selector) {
 }
 
 document.addEventListener("DOMContentLoaded", function() {
+  // download popup
+  let html = `<div id="popup-container">
+    <div id="popup-bg"></div>
+    <div id="popup">
+      <p>Thanks for your interest :)</p>
+      <p>Enter your email and we'll send you the font!</p>
+      <form action="/download" method="POST">
+        <input type="text" name="email" />
+        <br>
+        <input type="submit" value="Get the font!" />
+      </form>
+    </div>
+  </div>`
+  $("main").append($(html));
+  $("#popup-container").hide();
+
+  // download btn
+  $("#download").click(function() {
+    $("#popup-container").show();
+  });
+  $("#popup-bg").click(function() {
+    $("#popup-container").hide();
+  });
+
   // Main textarea
   text = $("#text");
 
@@ -57,7 +82,6 @@ document.addEventListener("DOMContentLoaded", function() {
   } else {
     text.attr("placeholder", "Is this the\nAmerican Dream?");
   }
-
 
   // auto grow the text box to fit text
   text.autogrow();
@@ -85,7 +109,6 @@ document.addEventListener("DOMContentLoaded", function() {
   });
 
 })
-
 
 window.onload = function() {
   // trigger autogrow

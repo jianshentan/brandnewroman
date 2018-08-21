@@ -38,6 +38,83 @@ a:link {
   text-decoration: none;
 }
 
+textarea:focus, input, input:focus{
+  outline: none;
+}
+
+/* -------------------- */
+/*   download popup     */
+/* -------------------- */
+
+#popup-bg {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(255, 255, 255, 0.8);
+  left: 0px;
+  top: 0px;
+  z-index: 200;
+  cursor: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAUElEQVQoU2NkYPh/pqKCgaGjg9GEAQuoqPh/pqODgYERxsCmGFmOEWQINsXoYmCF6IpBfJB1yLbAFSIrhrBR3U26QmQ34bSaKM+QEDzEBTgAnjBZF28fKg0AAAAASUVORK5CYII=), auto;
+}
+#popup-bg:after {
+  content : "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAHCAYAAADEUlfTAAAAGklEQVQYV2NkYPj/n4GBkZEBC8AqCFM36CQBkv4CCLEZXQUAAAAASUVORK5CYII=) repeat;
+  width: 100%;
+  height: 100%;
+  opacity : 0.2;
+  z-index: -1;
+}
+#popup {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  padding: 1em 2.5em;
+  background-color: white;
+  text-align: center;
+  color: blue;
+  z-index: 201;
+  border: 2px solid blue;
+}
+#popup form {
+  margin-top: 1em;
+  margin-bottom: 1em;
+  text-align: center;
+}
+#popup form input[type="text"] {
+  height: 36px;
+  line-height: 36px;
+  width: 100%;
+  text-align: center;
+  font-size: 1.25em;
+  border: 0px;
+  font-family: 'Roboto', sans-serif;
+  margin-top: 1em; 
+  border: 2px solid blue;
+}
+#popup form input[type="submit"] {
+  margin-top: 1em; 
+  border: 0px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.25em;
+  padding: 10px 20px;
+  background-color: blue;
+  color: white;
+  cursor: pointer;
+}
+
+@media only screen and ( max-device-width: 736px ) {
+  #popup {
+    text-align: center;
+    width: 80vw;
+    padding: 5vw;
+    font-size: 1.2em;
+  }
+}
 /* -------------------- */
 /*      corners         */
 /* -------------------- */

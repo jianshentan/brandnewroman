@@ -1,11 +1,7 @@
 {% from 'modules/_corners.html' import corners %}
 {% extends 'layout.html' %}
 {% block content %}
-{{ corners(isMain=False) }}
-
-<div id="navigation">
-  <a href="/"><div id="back">back</div></a>
-</div>
+{{ corners(about=True) }}
 
 <div id="about">
   <div class="container">
