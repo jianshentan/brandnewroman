@@ -1,0 +1,209 @@
+@font-face {
+  font-family: brand-new-roman;
+  src: url("/assets/fonts/brand-new-roman.otf") format("opentype");
+}
+@font-face {
+  font-family: brand-new-roman-bw;
+  src: url("/assets/fonts/brand-new-roman-bw.otf") format("opentype");
+}
+
+textarea:hover, 
+input:hover, 
+textarea:active, 
+input:active, 
+textarea:focus, 
+input:focus,
+button:focus,
+button:active,
+button:hover,
+label:focus,
+.btn:active,
+.btn.active {
+  outline:0px !important;
+  -webkit-appearance:none;
+}
+
+body {
+  padding: 0px;
+  margin: 0px !important;
+  font-family: 'Roboto', sans-serif;
+}
+@media only screen and ( max-device-width: 736px ) {
+  body {
+    font-size: 12px;
+  }
+}
+
+a:link {
+  text-decoration: none;
+}
+
+/* -------------------- */
+/*      corners         */
+/* -------------------- */
+
+#color-warning {
+  text-align: center;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  line-height: 1.75em;
+  width: 100vw;
+  position: fixed;
+  z-index: 100;
+  top: 0px;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+.icon {
+  height: 52px;
+	cursor: pointer;
+}
+#download {
+  background-color: blue;
+  color: white;
+  display: inline-block;
+  vertical-align: top;
+  height: 52px;
+  padding-left: 24px;
+  padding-right: 24px;
+  line-height: 52px;
+  margin-right: 12px;
+  cursor: pointer;
+}
+#options {
+  position: fixed;
+  bottom: 0px;
+  right: 0px;
+  z-index: 100;
+  padding: 10px 15px;
+}
+#options-share-btn {
+	cursor: pointer;
+}
+#created-by {
+  position: fixed;
+  bottom: 0px;
+  left: 0px;
+  z-index: 100;
+}
+#created-by-btn {
+  padding: 10px 15px;
+}
+@media only screen and ( max-device-width: 736px ) {
+  #color-warning {
+    text-align: left;
+    background-color: rgba(255, 255, 255, 0.5);
+    padding: 10px;
+    margin: 10px;
+    width: initial;
+    line-height: 1.5em;
+  }
+  .icon {
+    height: 5vh;
+  }
+  #download {
+    padding-left: 2vh;
+    padding-right: 2vh;
+    height: 5vh;
+    line-height: 5vh;
+  }
+}
+
+/* -------------------- */
+/*      index.html      */
+/* -------------------- */
+
+#text-container.center {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translateY(-50%) translateX(-50%);
+}
+#text-container {
+  position: relative;
+  overflow-x: hidden;
+}
+#text {
+  text-align: center;
+  overflow-x: hidden;
+  border: none;
+  font-size: 5em;
+  resize: none;
+  width: 90vw;
+  padding-top: 5vh;
+  padding-bottom: 5vh;
+  padding-left: 5vw;
+  padding-right: 5vw;
+}
+#share-text {
+  text-align: center;
+  position: absolute;
+  bottom: 1vh;
+  left: 50%;
+  transform: translateX(-50%);
+}
+@media only screen and ( max-device-width: 736px ) {
+  #text {
+    padding: 5vw;
+    font-size: 12vw;
+    width: 90vw;
+  }
+}
+
+/* -------------------- */
+/*      about.html      */
+/* -------------------- */
+
+.container {
+  margin-right: auto;
+  margin-left: auto;
+}
+@media (min-width: 768px) {
+  .container {
+    width: 750px;
+  }
+}
+@media (min-width: 992px) {
+  .container {
+    width: 970px;
+  }
+}
+@media (min-width: 1200px) {
+  .container {
+    width: 1170px;
+  }
+}
+
+#about-header {
+  font-size: 5em;
+  text-align: center;
+}
+
+#about {
+  font-family: 'Roboto', sans-serif;
+  padding: 2em;
+}
+
+#navigation {
+  position: fixed;
+  padding: 15px;
+  z-index: 101;
+}
+
+#navigation #back {
+  background-color: blue;
+  color: white;
+  padding: 5px 10px;
+  display: inline-block;
+  z-index: 101;
+}
+
+.download-btn {
+  background-color: blue;
+  padding: 15px;
+  color: white !important;
+  display: inline-block;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
