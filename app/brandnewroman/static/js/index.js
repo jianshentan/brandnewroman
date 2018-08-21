@@ -45,11 +45,17 @@ document.addEventListener("DOMContentLoaded", function() {
     <div id="popup">
       <p>Thanks for your interest :)</p>
       <p>Enter your email and we'll send you the font!</p>
-      <form action="/download" method="POST">
-        <input type="text" name="email" />
-        <br>
-        <input type="submit" value="Get the font!" />
-      </form>
+			<form class="subscribe-form">
+					<br>
+					<div class="subscribe-form-el">
+							<input class="subscribe-form-input" type="text" placeholder="First name" name="firstname" value="">
+							<input class="subscribe-form-input" type="text" placeholder="Last name" name="lastname" value="">
+							<input class="subscribe-form-input" type="text" placeholder="your@email.com" name="email" value="">
+					</div>
+					<input class="subscribe-form-submit" type="submit" value="Submit">
+					<br><br>
+					<div class="subscribe-form-feedback"></div>
+			</form>
     </div>
   </div>`
   $("main").append($(html));
@@ -108,6 +114,17 @@ document.addEventListener("DOMContentLoaded", function() {
     });
   });
 
+
+  const subscribe_url = '/subscribe';
+  const subscribe_form = $(".subscribe-form");
+  const subscribe_feedback_selector = '.subscribe-form-feedback';
+  const subscribe_submit_selector = '.subscribe-form-submit';
+
+  subscribe_newsletter(
+    subscribe_url, 
+    subscribe_form, 
+    subscribe_feedback_selector,
+    subscribe_submit_selector);
 })
 
 window.onload = function() {

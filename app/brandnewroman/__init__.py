@@ -1,3 +1,5 @@
+import os
+from .mailchimp import mc
 from flask import Flask
 from .routes import bp
 
@@ -12,6 +14,15 @@ def create_app(
               static_url_path='/assets',
               static_folder=static_folder,
               template_folder=template_folder)
+
+  # set mailchimp settings 
+  mc_user = os.getenv('MAILCHIMP_USERNAME')
+  mc_key = os.getenv('MAILCHIMP_KEY')
+  mc_list_id = os.getenv('MAILCHIMP_LIST_ID')
+
+  # load mailchimp credentials
+  mc.set_credentials(mc_user, mc_key)
+  mc.set_list_id(mc_list_id)
 
   # Apply overrides
   app.config.update(config_overrides)
