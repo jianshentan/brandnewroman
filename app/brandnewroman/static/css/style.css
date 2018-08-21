@@ -89,6 +89,7 @@ textarea:focus, input, input:focus{
   height: 36px;
   line-height: 36px;
   width: 100%;
+  max-width: 420px;
   text-align: center;
   font-size: 1.25em;
   border: 0px;
@@ -97,7 +98,7 @@ textarea:focus, input, input:focus{
   border: 2px solid blue;
 }
 #popup form input[type="submit"] {
-  margin-top: 1em; 
+  margin-top: 1.5em; 
   border: 0px;
   font-family: 'Roboto', sans-serif;
   font-size: 1.25em;
@@ -164,6 +165,18 @@ textarea:focus, input, input:focus{
 }
 #created-by-btn {
   padding: 10px 15px;
+}
+#navigation {
+  position: fixed;
+  padding: 15px;
+  z-index: 101;
+}
+#navigation #back {
+  background-color: blue;
+  color: white;
+  padding: 5px 10px;
+  display: inline-block;
+  z-index: 101;
 }
 @media only screen and ( max-device-width: 736px ) {
   #color-warning {
@@ -250,33 +263,23 @@ textarea:focus, input, input:focus{
   }
 }
 
+#about-header {
+  width: 100%;
+  text-align: center;
+}
+#about-header img {
+  max-width: 100%;
+}
 #about {
   font-family: 'Roboto', sans-serif;
   padding: 2em;
-	padding-top: 4em;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
 }
-
-#navigation {
-  position: fixed;
-  padding: 15px;
-  z-index: 101;
+@media only screen and ( max-device-width: 736px ) {
+  #about {
+    width: 90vw;
+  }
 }
-
-#navigation #back {
-  background-color: blue;
-  color: white;
-  padding: 5px 10px;
-  display: inline-block;
-  z-index: 101;
-}
-
-.download-btn {
-  background-color: blue;
-  padding: 15px;
-  color: white !important;
-  display: inline-block;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  cursor: pointer;
-}
-

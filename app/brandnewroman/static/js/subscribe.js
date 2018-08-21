@@ -29,8 +29,13 @@ function subscribe_newsletter(
                     if (res.success == true) {
                         subscribe_form_feedback
                             .css('color', 'blue') // green
-                            .html("Thank you! We'll send you the font. Enjoy :)");
+                            .html("Hang tight, you'll see the font in your inbox shortly. Enjoy :)");
                             
+                        subscribe_form_submit.val('Thank You!');
+                        subscribe_form_submit.css({
+                          'background-color': '#888',
+                          'cursor': 'default'
+                        });
                         // disable form submit on success
                         subscribe_form_submit.prop('disabled', true);
                     } else {

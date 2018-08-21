@@ -1,14 +1,18 @@
 {% macro corners(custom=False, about=False) %}
+  {# custom: index page - the page you can type in #}
+  {# about: about page #}
 
-  {% if not custom %}
+  {% if about %}
   <div id="navigation">
     <a href="/"><div id="back">back</div></a>
   </div>
   {% endif %}
 
+  {% if custom %}
   <div id="color-warning" style="display:none;">
     Looks like your browser doesn't support <a href="https://www.colorfonts.wtf" target="_blank">Color Fonts</a>. To get the best experience, try using <a href="https://www.firefox.com" target="_blank">FireFox</a> or <a href="https://www.microsoft.com/en-us/windows/microsoft-edge" target="_blank">Microsoft Edge</a>.
   </div>
+  {% endif %}
 
   <div id="options">
     <div id="download">DOWNLOAD</div>
