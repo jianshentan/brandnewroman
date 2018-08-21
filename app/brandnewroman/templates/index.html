@@ -1,0 +1,13 @@
+{% from 'modules/_corners.html' import corners %}
+{% extends 'layout.html' %}
+{% block content %}
+{{ corners(isMain=True) }}
+
+<div id="text-container">
+  <textarea id="text" placeholder="">{{ text }}</textarea>
+  <div id="share-text">
+    <em>Copy/paste the URL to share your creation!</em>
+  </div>
+</div>
+
+{% endblock %}

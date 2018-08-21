@@ -1,0 +1,27 @@
+{% from 'modules/_corners.html' import corners %}
+{% extends 'layout.html' %}
+{% block content %}
+{{ corners(isMain=False) }}
+
+<div id="navigation">
+  <a href="/"><div id="back">back</div></a>
+</div>
+
+<div id="about">
+  <div class="container">
+    <p id="about-header">Brand New Roman</p>
+    <p>
+      Brand New Roman is an <a href="https://www.colorfonts.wtf" target="_blank">open type SVG color font.</a> This a vector font format that allows for multicolored fonts where the color is embedded directly in the individual letters.
+    </p>
+    <p>
+      Currently color fonts are supported in Adobe Photoshop/illustrator/InDesign CC 2018+, and display in Firefox and Edge; Safari support is coming in September. We have also made a black&white version of the font for use on unsupported platforms.
+    </p>
+    <p>
+      Brand New Roman was made by <a href="https://www.hellovelocity.com" target="_blank">Hello Velocity</a>. We are a New York based web studio, specializing in experimental marketing.
+    </p>
+    <p>
+      Brand New Roman is free to download, in both color and black & white versions. We'd love you to use it. Send us screenshots or share on Instagram under <a href="https://www.instagram.com/explore/tags/brandnewroman/" target="_blank">#BrandNewRoman</a> so we can see what you make!
+    </p>
+</div>
+
+{% endblock %}
