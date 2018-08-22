@@ -39,7 +39,16 @@ function resize(selector) {
 }
 
 document.addEventListener("DOMContentLoaded", function() {
-  // download popup
+  // set up event tracking on GA
+  $(".ga").each(function() {
+    var ga_id = $(this).attr('ga_id');
+    gtag('event', 'click', {
+      'event_category': 'clickable',
+      'event_label': ga_id
+    });
+  });
+
+  // set up the 'download popup'
   let html = `<div id="popup-container">
     <div id="popup-bg"></div>
     <div id="popup">
@@ -51,7 +60,7 @@ document.addEventListener("DOMContentLoaded", function() {
 							<input class="subscribe-form-input" type="text" placeholder="Last name" name="lastname" value="">
 							<input class="subscribe-form-input" type="text" placeholder="your@email.com" name="email" value="">
 					</div>
-					<input class="subscribe-form-submit" type="submit" value="Get The Font!">
+					<input class="subscribe-form-submit ga" id="subscribe-form-submit-btn" type="submit" value="Get The Font!">
 					<br><br>
 					<div class="subscribe-form-feedback"></div>
 			</form>
@@ -109,11 +118,15 @@ document.addEventListener("DOMContentLoaded", function() {
         // Do action
         url_string = encodeURIComponent(elem.val())
         window.history.replaceState({ foo: "bar" }, 'Title', '/c/' + url_string);
+        // log
+        gtag('event', 'textarea-changed', {
+          'event_category': 'typeable'
+        });
       }
     });
   });
 
-
+  // set up subscribe newsletter
   const subscribe_url = '/subscribe';
   const subscribe_form = $(".subscribe-form");
   const subscribe_feedback_selector = '.subscribe-form-feedback';
@@ -127,12 +140,14 @@ document.addEventListener("DOMContentLoaded", function() {
 })
 
 window.onload = function() {
-  // trigger autogrow
-  text = $("#text");
-  text.html(text.html()+"!");
-  text.trigger($.Event("keydown"));
-  text.html(text.html().slice(0, -1));
+  if ($("#text").length) {
+    // trigger autogrow
+    text = $("#text");
+    text.html(text.html()+"!");
+    text.trigger($.Event("keydown"));
+    text.html(text.html().slice(0, -1));
 
-  // trigger resize func
-  resize('#text');
+    // trigger resize func
+    resize('#text');
+  }
 };

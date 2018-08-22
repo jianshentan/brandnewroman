@@ -4,28 +4,28 @@
 
   {% if about %}
   <div id="navigation">
-    <a href="/"><div id="back">back</div></a>
+    <a href="/" class="ga" ga_id="corner-back-btn"><div id="back">back</div></a>
   </div>
   {% endif %}
 
   {% if custom %}
   <div id="color-warning" style="display:none;">
-    Looks like your browser doesn't support <a href="https://www.colorfonts.wtf" target="_blank">Color Fonts</a>. To get the best experience, try using <a href="https://www.firefox.com" target="_blank">FireFox</a> or <a href="https://www.microsoft.com/en-us/windows/microsoft-edge" target="_blank">Microsoft Edge</a>.
+    Looks like your browser doesn't support <a href="https://www.colorfonts.wtf" target="_blank" class="ga" ga_id="corner-warning-color-font-link">Color Fonts</a>. To get the best experience, try using <a href="https://www.firefox.com" target="_blank" class="ga" ga_id="corner-warning-firefox-link">FireFox</a> or <a href="https://www.microsoft.com/en-us/windows/microsoft-edge" target="_blank" class="ga" ga_id="corner-warning-edge-link">Microsoft Edge</a>.
   </div>
   {% endif %}
 
   <div id="options">
-    <div id="download">DOWNLOAD</div>
+    <div id="download" class="ga" ga_id="corner-download-btn">DOWNLOAD</div>
     {% if custom %}
-    <a href="/about"><img src="/assets/images/about.png" id="options-about-btn" class="icon bottom-right-icon"/></a>
+    <a href="/about" class="ga" ga_id="corner-about-link"><img src="/assets/images/about.png" id="options-about-btn" class="icon bottom-right-icon"/></a>
     {% else %}
-    <a href="/"><img src="/assets/images/type.png" id="options-type-btn" class="icon bottom-right-icon" /></a>
+    <a href="/" class="ga" ga_id="corner-custom-link"><img src="/assets/images/type.png" id="options-type-btn" class="icon bottom-right-icon" /></a>
     {% endif %}
   </div>
 
   <div id="created-by">
     <div id="created-by-btn">
-      <a href="https://www.hellovelocity.com" target="_blank">
+      <a href="https://www.hellovelocity.com" target="_blank" class="ga" ga_id="corner-hv-link">
         <img src="/assets/images/hv-logo.png" id="created-by-hv" class="icon" />
       </a>
     </div>
