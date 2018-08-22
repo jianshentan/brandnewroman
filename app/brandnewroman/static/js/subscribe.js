@@ -16,6 +16,7 @@ function subscribe_newsletter(
 
             subscribe_form.submit(function(e) {
                 e.preventDefault();
+                subscribe_form_submit.prop('disabled', true)
 
                 fetch(subscribe_url, {
                     method: 'POST',

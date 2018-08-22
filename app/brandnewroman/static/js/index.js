@@ -25,6 +25,11 @@ var isChrome = !!window.chrome && !!window.chrome.webstore;
 // Blink engine detection
 var isBlink = (isChrome || isOpera) && !!window.CSS;
 
+// helper replaceAll
+function replaceAll(str, find, replace) {
+  return str.replace(new RegExp(find, 'g'), replace);
+}
+
 // resize and determine whether to center vertical (absolute) 
 // or stick to top (relative)
 function resize(selector) {
@@ -116,11 +121,14 @@ document.addEventListener("DOMContentLoaded", function() {
         // Updated stored value
         elem.data('oldVal', elem.val());
         // Do action
-        url_string = encodeURIComponent(elem.val())
+        url_string = encodeURIComponent(elem.val());
+        // manually encode <enter> from '%0A' to '%9Z' (since IIS servers will error out when it sees '%0A's)
+        url_string = replaceAll(url_string,"%0A", "<enter>");
         window.history.replaceState({ foo: "bar" }, 'Title', '/c/' + url_string);
         // log
         gtag('event', 'textarea-changed', {
-          'event_category': 'typeable'
+          'event_category': 'typeable',
+          'event_label': 'clientId'
         });
       }
     });
