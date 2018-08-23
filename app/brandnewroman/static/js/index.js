@@ -43,6 +43,11 @@ function resize(selector) {
   }
 }
 
+// check if valid hexcode
+function hexCheck(code) {
+  return /(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i.test(code);
+}
+
 document.addEventListener("DOMContentLoaded", function() {
   // set up event tracking on GA
   $(".ga").each(function() {
@@ -83,27 +88,94 @@ document.addEventListener("DOMContentLoaded", function() {
   });
 
   // Main textarea
-  text = $("#text");
+  let text = $("#text");
 
-  // set font color or bw depending on browser
-  if (isFirefox || isEdge) {
+  // bgColorPicker and Color pickers 
+  let colorPicker = $("#editor-color-picker");
+  let bgColorPicker = $("#editor-bg-color-picker");
+
+  // set up colorPicker pickers
+  var lastValidBgColorHex = bgColorPicker.val();
+  var lastValidColorHex = colorPicker.val();
+
+  function updateBgColor() {
+    var bgColorHex = bgColorPicker.val()
+    if (hexCheck(bgColorHex)) {
+      $("body").css("background-color", bgColorHex);
+      text.css("background-color", bgColorHex);
+      lastValidBgColorHex = bgColorHex;
+      updateURL(text.val());
+    } else {
+      bgColorPicker.val(lastValidBgColorHex);
+    }
+  }
+
+  function updateColor() {
+    var colorHex = colorPicker.val();
+    if (hexCheck(colorHex)) {
+      text.css("color", colorHex);
+      lastValidColorHex = colorHex;
+      updateURL(text.val());
+    } else {
+      colorPicker.val(lastValidColorHex);
+    }
+  }
+
+  updateBgColor();
+  updateColor();
+
+  bgColorPicker.change(function() { updateBgColor() });
+  colorPicker.change(function() { updateColor() });
+
+  // set font colorPicker or bw depending on browser 
+  if (isFirefox || isEdge) { // has colorPicker
     text.css("font-family", "brand-new-roman");
     $("#about-header").css("font-family", "brand-new-roman");
-  } else {
+    colorPicker.parent(".color-picker").hide();
+
+    // set up switch
+    function respondToSwitch() {
+      if ($("#myonoffswitch").is(":checked")) {
+        text.css("font-family", "brand-new-roman");
+        colorPicker.parent(".color-picker").hide();
+      } else {
+        text.css("font-family", "brand-new-roman-bw");
+        colorPicker.parent(".color-picker").show();
+      }
+    }
+    respondToSwitch();
+    $("#myonoffswitch").change(function() {
+      respondToSwitch();
+    });
+  } else { // no colorPicker support
     text.css("font-family", "brand-new-roman-bw");
     $("#about-header").css("font-family", "brand-new-roman-bw");
     $("#color-warning").show();
+    $("#editor-right").hide()
   }
 
-  // change text depending on mobile/desktop
-  if (window.mobilecheck()) {
-    text.attr("placeholder", "type here");
-  } else {
-    text.attr("placeholder", "Is this the\nAmerican Dream?");
-  }
+  // close colorPicker warning 
+  $("#color-warning-close").click(function() {
+    $("#color-warning").slideUp();
+  }); 
 
   // auto grow the text box to fit text
   text.autogrow();
+
+  // update url
+  function updateURL(t) {
+    // encode string for url
+    var txt = encodeURIComponent(t);
+    // manually encode <enter> from '%0A' to '%9Z' (since IIS servers will error out when it sees '%0A's)
+    txt = replaceAll(txt, "%0A", "<enter>");
+    // embed colorPicker & bgcolor into url
+    var colorString = encodeURIComponent(colorPicker.val());
+    var bgColorString = encodeURIComponent(bgColorPicker.val());
+    // combine to make url string
+    var url_string = "?txt="+txt+"&color="+colorString+"&bg_color="+bgColorString;
+    // update url
+    window.history.replaceState({ foo: "bar" }, 'Title', '/c' + url_string);
+  }
 
   // each time a value is changed in the text box...
   text.each(function() {
@@ -120,11 +192,8 @@ document.addEventListener("DOMContentLoaded", function() {
       if (elem.data('oldVal') != elem.val()) {
         // Updated stored value
         elem.data('oldVal', elem.val());
-        // Do action
-        url_string = encodeURIComponent(elem.val());
-        // manually encode <enter> from '%0A' to '%9Z' (since IIS servers will error out when it sees '%0A's)
-        url_string = replaceAll(url_string,"%0A", "<enter>");
-        window.history.replaceState({ foo: "bar" }, 'Title', '/c/' + url_string);
+        // update url
+        updateURL(elem.val());
         // log
         gtag('event', 'textarea-changed', {
           'event_category': 'typeable',

@@ -1,13 +1,15 @@
 {% from 'modules/_corners.html' import corners %}
 {% extends 'layout.html' %}
 {% block content %}
-{{ corners(custom=True) }}
+{{ corners(custom=True, bg_color=bg_color, color=color) }}
 
 <div id="text-container">
-  <textarea id="text" placeholder="" spellcheck="false">{% if text is defined %}{{ decode(text) }}{% endif %}</textarea>
+  <textarea id="text" placeholder="type here" spellcheck="false">{% if text is defined %}{{ decode(text) }}{% endif %}</textarea>
+  {#
   <div id="share-text">
     <em>Copy/paste the URL to share your creation!</em>
   </div>
+  #}
 </div>
 
 {% endblock %}

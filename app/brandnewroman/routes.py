@@ -14,18 +14,27 @@ import urllib.request as urllib
 from urllib.parse import quote
 from sendgrid.helpers.mail import Email, Content, Mail, Attachment
 
+
 @bp.route('/')
 def index():
   return redirect(url_for('.custom'))
 
-    
-@bp.route('/c/', defaults={'text': None})
-@bp.route('/c/<text>')
-def custom(text):
-  if text == None:
-    return render_template('index.html')
+
+@bp.route('/c', methods=['GET'])
+def custom():
+  txt = request.args.get('txt')
+  color = request.args.get('color')
+  bg_color = request.args.get('bg_color')
+
+  if color is None:
+    color = '#000000'
+  if bg_color is None:
+    bg_color = '#ffffff'
+  
+  if txt is None:
+    return render_template('index.html', bg_color=bg_color, color=color)
   else:
-    return render_template('index.html', text=text)
+    return render_template('index.html', text=txt, bg_color=bg_color, color=color)
 
 
 @bp.route('/about')
