@@ -30,6 +30,7 @@ function hexCheck(code) {
 // set font colorPicker or bw depending on browser 
 function setColorOrBw() {
   let colorPicker = $("#editor-color-picker");
+  let text = $("#text");
 
   if ($("html").hasClass("chromacheck-svg")) { // if browser supports color
     text.css("font-family", "brand-new-roman");
