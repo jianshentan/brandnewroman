@@ -357,10 +357,6 @@ textarea:focus, input, input:focus{
 #about {
   font-family: 'Roboto', sans-serif;
   padding: 2em;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translateX(-50%) translateY(-50%);
   font-size: 1.2em;
 }
 #about a {
