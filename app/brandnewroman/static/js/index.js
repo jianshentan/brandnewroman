@@ -4,27 +4,6 @@ window.mobilecheck = function() {
   return check;
 };
 
-// Opera 8.0+
-var isOpera = (!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
-
-// Firefox 1.0+
-var isFirefox = typeof InstallTrigger !== 'undefined';
-
-// Safari 3.0+ "[object HTMLElementConstructor]" 
-var isSafari = /constructor/i.test(window.HTMLElement) || (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!window['safari'] || safari.pushNotification);
-
-// Internet Explorer 6-11
-var isIE = /*@cc_on!@*/false || !!document.documentMode;
-
-// Edge 20+
-var isEdge = !isIE && !!window.StyleMedia;
-
-// Chrome 1+
-var isChrome = !!window.chrome && !!window.chrome.webstore;
-
-// Blink engine detection
-var isBlink = (isChrome || isOpera) && !!window.CSS;
-
 // helper replaceAll
 function replaceAll(str, find, replace) {
   return str.replace(new RegExp(find, 'g'), replace);
@@ -46,6 +25,37 @@ function resize(selector) {
 // check if valid hexcode
 function hexCheck(code) {
   return /(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i.test(code);
+}
+
+// set font colorPicker or bw depending on browser 
+function setColorOrBw() {
+  let colorPicker = $("#editor-color-picker");
+
+  if ($("html").hasClass("chromacheck-svg")) { // if browser supports color
+    text.css("font-family", "brand-new-roman");
+    $("#about-header").css("font-family", "brand-new-roman");
+    colorPicker.parent(".color-picker").hide();
+
+    // set up switch
+    function respondToSwitch() {
+      if ($("#myonoffswitch").is(":checked")) {
+        text.css("font-family", "brand-new-roman");
+        colorPicker.parent(".color-picker").hide();
+      } else {
+        text.css("font-family", "brand-new-roman-bw");
+        colorPicker.parent(".color-picker").show();
+      }
+    }
+    respondToSwitch();
+    $("#myonoffswitch").change(function() {
+      respondToSwitch();
+    });
+  } else { // no colorPicker support
+    text.css("font-family", "brand-new-roman-bw");
+    $("#about-header").css("font-family", "brand-new-roman-bw");
+    $("#color-warning").show();
+    $("#editor-right").hide()
+  }
 }
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -127,32 +137,6 @@ document.addEventListener("DOMContentLoaded", function() {
   bgColorPicker.change(function() { updateBgColor() });
   colorPicker.change(function() { updateColor() });
 
-  // set font colorPicker or bw depending on browser 
-  if (isFirefox || isEdge) { // has colorPicker
-    text.css("font-family", "brand-new-roman");
-    $("#about-header").css("font-family", "brand-new-roman");
-    colorPicker.parent(".color-picker").hide();
-
-    // set up switch
-    function respondToSwitch() {
-      if ($("#myonoffswitch").is(":checked")) {
-        text.css("font-family", "brand-new-roman");
-        colorPicker.parent(".color-picker").hide();
-      } else {
-        text.css("font-family", "brand-new-roman-bw");
-        colorPicker.parent(".color-picker").show();
-      }
-    }
-    respondToSwitch();
-    $("#myonoffswitch").change(function() {
-      respondToSwitch();
-    });
-  } else { // no colorPicker support
-    text.css("font-family", "brand-new-roman-bw");
-    $("#about-header").css("font-family", "brand-new-roman-bw");
-    $("#color-warning").show();
-    $("#editor-right").hide()
-  }
 
   // close colorPicker warning 
   $("#color-warning-close").click(function() {
@@ -227,4 +211,6 @@ window.onload = function() {
     // trigger resize func
     resize('#text');
   }
+
+  setColorOrBw()
 };

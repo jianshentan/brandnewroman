@@ -116,6 +116,12 @@ textarea:focus, input, input:focus{
     padding: 5vw;
     font-size: 1.2em;
   }
+  #popup form input[type="text"] {
+    width: 90%;
+  }
+  #popup form input[type="submit"] {
+    -webkit-appearance: none;
+  }
 }
 /* -------------------- */
 /*      corners         */
@@ -263,12 +269,12 @@ textarea:focus, input, input:focus{
     padding: 1vh;
   }
   .color-picker {
-    height: 2.4vh;
-    padding: 0.5vh;
+    height: auto;
+    padding: auto;
   }
   .color-picker input {
     height: 2vh;
-    width: 8vh;
+    width: 9vh;
   }
 }
 
