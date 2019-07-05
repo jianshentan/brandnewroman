@@ -3,9 +3,11 @@ from .mailchimp import mc
 from flask import Flask
 from .routes import bp
 from urllib.parse import unquote
+from dotenv import load_dotenv
+load_dotenv()
 
 
-# manually decode <enter> from '%9Z' to '%0A' 
+# manually decode <enter> from '%9Z' to '%0A'
 # (since IIS servers will error out when it sees '%0A's)
 def decode(text):
   if text:
@@ -15,7 +17,7 @@ def decode(text):
 
 
 def create_app(
-    package_name=__name__, 
+    package_name=__name__,
     static_folder='static',
     template_folder='templates',
     **config_overrides):
@@ -26,7 +28,7 @@ def create_app(
               static_folder=static_folder,
               template_folder=template_folder)
 
-  # set mailchimp settings 
+  # set mailchimp settings
   mc_user = os.getenv('MAILCHIMP_USERNAME')
   mc_key = os.getenv('MAILCHIMP_KEY')
   mc_list_id = os.getenv('MAILCHIMP_LIST_ID')
@@ -35,7 +37,7 @@ def create_app(
   mc.set_credentials(mc_user, mc_key)
   mc.set_list_id(mc_list_id)
 
-  # custom decoder for '%0A' and '%0U' as these 
+  # custom decoder for '%0A' and '%0U' as these
   # characters are not supported in iis servers
   app.jinja_env.globals.update(decode=decode)
 

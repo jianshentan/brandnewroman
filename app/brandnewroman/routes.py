@@ -1,6 +1,6 @@
 import jinja2
 from flask import (
-  g, Blueprint, render_template, jsonify, request, 
+  g, Blueprint, render_template, jsonify, request,
   redirect, url_for
 )
 from .forms import SubscribeForm
@@ -30,7 +30,7 @@ def custom():
     color = '#000000'
   if bg_color is None:
     bg_color = '#ffffff'
-  
+
   if txt is None:
     return render_template('index.html', bg_color=bg_color, color=color)
   else:
@@ -53,7 +53,7 @@ def email():
         email=form.email.data,
         first_name=form.firstname.data,
         last_name=form.lastname.data)
-        
+
       if not success:
         return jsonify(success=False, errors=msg)
 
